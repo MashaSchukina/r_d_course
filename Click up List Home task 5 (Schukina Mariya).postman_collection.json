@@ -1,0 +1,748 @@
+{
+	"info": {
+		"_postman_id": "4fa14e81-6605-4cbf-bb69-ddf4bd0e62c6",
+		"name": "Click up List Home task 5 (Schukina Mariya)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18051361"
+	},
+	"item": [
+		{
+			"name": "Create List - Shema check",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var random_string = pm.variables.replaceIn('{{$randomLoremWord}}')\r",
+							"pm.collectionVariables.set(\"list_name\", random_string)"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.collectionVariables.set(\"list_id\", jsonData.id);",
+							"",
+							"const Ajv = require('ajv');",
+							"const ajv = new Ajv();",
+							"",
+							"var schema = {",
+							"    \"type\": \"object\",",
+							"    \"required\": [\"id\", \"name\", \"orderindex\", \"task_count\", \"content\", \"statuses\", \"folder\", \"space\", \"inbound_address\", \"assignee\", \"due_date\", \"start_date\"],",
+							"    \"properties\": {",
+							"        \"id\": { \"type\": \"string\" },",
+							"        \"name\": { \"type\": \"string\" },",
+							"        \"deleted\": { \"type\": \"boolean\" },",
+							"        \"orderindex\": { \"type\": \"number\" },",
+							"        \"content\": { \"type\": \"string\" },",
+							"        \"priority\": {",
+							"            \"type\": [\"object\", \"null\"],",
+							"            \"required\": [\"priority\", \"color\"],",
+							"            \"properties\": {",
+							"                \"priority\": { \"type\": \"string\" },",
+							"                \"color\": { \"type\": \"string\" }",
+							"            }",
+							"        },",
+							"        \"assignee\": {",
+							"            \"type\": [\"object\", \"null\"],",
+							"            \"required\": [\"id\", \"color\", \"username\", \"initials\", \"profilePicture\"],",
+							"            \"properties\": {",
+							"                \"id\": { \"type\": \"integer\" },",
+							"                \"color\": { \"type\": \"string\" },",
+							"                \"username\": { \"type\": \"integer\" },",
+							"                \"initials\": { \"type\": \"string\" },",
+							"                \"profilePicture\": { \"type\": \"string\" }",
+							"            }",
+							"        },",
+							"        \"task_count\": { \"type\": \"number\" },",
+							"        \"due_date\": { \"type\": [\"string\", \"null\"] },",
+							"        \"start_date\": { \"type\": [\"string\", \"null\"] },",
+							"        \"start_date_time\": { \"type\": [\"string\", \"null\"] },",
+							"        \"start_date\": { \"type\": [\"string\", \"null\"] },",
+							"        \"folder\": {",
+							"            \"type\": \"object\",",
+							"            \"required\": [\"id\", \"name\", \"hidden\", \"archived\", \"access\"],",
+							"            \"properties\": {",
+							"                \"id\": { \"type\": \"string\" },",
+							"                \"name\": { \"type\": \"string\" },",
+							"                \"hidden\": { \"type\": \"boolean\" },",
+							"                \"archived\": { \"type\": \"boolean\" },",
+							"                \"access\": { \"type\": \"boolean\" }",
+							"            }",
+							"        },",
+							"        \"space\": {",
+							"            \"type\": \"object\",",
+							"            \"required\": [\"id\", \"name\", \"archived\", \"access\"],",
+							"            \"properties\": {",
+							"                \"id\": { \"type\": \"string\" },",
+							"                \"name\": { \"type\": \"string\" },",
+							"                \"archived\": { \"type\": \"boolean\" },",
+							"                \"access\": { \"type\": \"boolean\" }",
+							"            }",
+							"        },",
+							"        \"inbound_address\": { \"type\": \"string\" },",
+							"        \"archived\": { \"type\": \"boolean\" },",
+							"        \"override_statuses\": { \"type\": \"boolean\" },",
+							"        \"statuses\": {",
+							"            \"type\": \"array\",",
+							"            \"items\": {",
+							"                \"type\": \"object\",",
+							"                \"required\": [\"id\", \"status\", \"orderindex\", \"color\", \"type\"],",
+							"                \"properties\": {",
+							"                    \"id\": { \"type\": \"string\" },",
+							"                    \"status\": { \"type\": \"string\" },",
+							"                    \"orderindex\": { \"type\": \"number\" },",
+							"                    \"color\": { \"type\": \"string\" },",
+							"                    \"type\": { \"type\": \"string\" },",
+							"                    \"status_group\": { \"type\": \"string\" }",
+							"                }",
+							"            }",
+							"        },",
+							"        \"permission_level\": { \"type\": \"string\" }",
+							"    },",
+							"",
+							"    \"status\": {",
+							"        \"type\": \"object\",",
+							"        \"required\": [\"status\", \"color\", \"hide_label\"],",
+							"        \"properties\": {",
+							"            \"istatus\": { \"type\": \"string\" },",
+							"            \"color\": { \"type\": \"string\" },",
+							"            \"hide_label\": { \"type\": \"boolean\" }",
+							"        }",
+							"    },",
+							"};",
+							"",
+							"const validate = ajv.compile(schema);",
+							"const response = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"Schema is valid\", function () {",
+							"   const valid = validate(response);",
+							"   pm.expect(valid, JSON.stringify(validate.errors)).to.be.true;",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"ListName-{{list_name}}\"\r\n  //,\"status\": \"red\"\r\n  //,\"priority\": 1\r\n // ,\"due_date_time\": true\r\n // ,\"due_date\": 1567780450202\r\n// ,\"markdown_content\": \"# New List Content\\n ***bold and italicized text***\"\r\n//,\"content\": \"New List Content\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_Url}}/folder/{{folder_ID}}/list",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"folder",
+						"{{folder_ID}}",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get List - Schema check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const Ajv = require('ajv');",
+							"const ajv = new Ajv();",
+							"",
+							"var schema = {",
+							"    \"type\": \"object\",",
+							"    \"required\": [\"id\", \"name\", \"orderindex\", \"task_count\", \"content\", \"statuses\", \"folder\", \"space\", \"inbound_address\", \"due_date\", \"start_date\"],",
+							"    \"properties\": {",
+							"        \"id\": { \"type\": \"string\" },",
+							"        \"name\": { \"type\": \"string\" },",
+							"        \"deleted\": { \"type\": \"boolean\" },",
+							"        \"orderindex\": { \"type\": \"number\" },",
+							"        \"content\": { \"type\": \"string\" },",
+							"        \"priority\": {",
+							"            \"type\": [\"object\", \"null\"],",
+							"            \"properties\": {",
+							"                \"priority\": { \"type\": \"string\" },",
+							"                \"color\": { \"type\": \"string\" }",
+							"            }",
+							"        },",
+							"        \"assignee\": {",
+							"            \"type\": [\"object\", \"null\"],",
+							"            \"properties\": {",
+							"                \"id\": { \"type\": \"integer\" },",
+							"                \"color\": { \"type\": \"string\" },",
+							"                \"username\": { \"type\": \"string\" },",
+							"                \"initials\": { \"type\": \"string\" },",
+							"                \"profilePicture\": { \"type\": [\"string\", \"null\"] }",
+							"            }",
+							"        },",
+							"        \"task_count\": { \"type\": \"number\" },",
+							"        \"due_date\": { \"type\": [\"string\", \"null\"] },",
+							"        \"due_date_time\": { \"type\": [\"boolean\", \"null\"] },",
+							"        \"start_date\": { \"type\": [\"string\", \"null\"] },",
+							"        \"start_date_time\": { \"type\": [\"string\", \"null\"] },",
+							"        \"folder\": {",
+							"            \"type\": \"object\",",
+							"            \"required\": [\"id\", \"name\", \"hidden\", \"archived\", \"access\"],",
+							"            \"properties\": {",
+							"                \"id\": { \"type\": \"string\" },",
+							"                \"name\": { \"type\": \"string\" },",
+							"                \"hidden\": { \"type\": \"boolean\" },",
+							"                \"archived\": { \"type\": \"boolean\" },",
+							"                \"access\": { \"type\": \"boolean\" }",
+							"            }",
+							"        },",
+							"        \"space\": {",
+							"            \"type\": \"object\",",
+							"            \"required\": [\"id\", \"name\", \"archived\", \"access\"],",
+							"            \"properties\": {",
+							"                \"id\": { \"type\": \"string\" },",
+							"                \"name\": { \"type\": \"string\" },",
+							"                \"archived\": { \"type\": \"boolean\" },",
+							"                \"access\": { \"type\": \"boolean\" }",
+							"            }",
+							"        },",
+							"        \"inbound_address\": { \"type\": \"string\" },",
+							"        \"archived\": { \"type\": \"boolean\" },",
+							"        \"override_statuses\": { \"type\": \"boolean\" },",
+							"        \"statuses\": {",
+							"            \"type\": \"array\",",
+							"            \"items\": {",
+							"                \"type\": \"object\",",
+							"                \"required\": [\"id\", \"status\", \"orderindex\", \"color\", \"type\"],",
+							"                \"properties\": {",
+							"                    \"id\": { \"type\": \"string\" },",
+							"                    \"status\": { \"type\": \"string\" },",
+							"                    \"orderindex\": { \"type\": \"number\" },",
+							"                    \"color\": { \"type\": \"string\" },",
+							"                    \"type\": { \"type\": \"string\" },",
+							"                    \"status_group\": { \"type\": \"string\" }",
+							"                }",
+							"            }",
+							"        },",
+							"        \"permission_level\": { \"type\": \"string\" }",
+							"    }",
+							"};",
+							"",
+							"const validate = ajv.compile(schema);",
+							"",
+							"pm.test(\"Schema is valid\", function () {",
+							"    const valid = validate(jsonData);",
+							"    pm.expect(valid, JSON.stringify(validate.errors)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/list/{{list_id}}",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"list",
+						"{{list_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update List - Schema check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const Ajv = require('ajv');",
+							"const ajv = new Ajv();",
+							"",
+							"var schema = {",
+							"    \"type\": \"object\",",
+							"    \"required\": [\"id\", \"name\", \"orderindex\", \"task_count\", \"content\", \"statuses\", \"folder\", \"space\", \"inbound_address\", \"due_date\", \"start_date\"],",
+							"    \"properties\": {",
+							"        \"id\": { \"type\": \"string\" },",
+							"        \"name\": { \"type\": \"string\" },",
+							"        \"deleted\": { \"type\": \"boolean\" },",
+							"        \"orderindex\": { \"type\": \"number\" },",
+							"        \"content\": { \"type\": \"string\" },",
+							"        \"priority\": {",
+							"            \"type\": [\"object\", \"null\"],",
+							"            \"properties\": {",
+							"                \"priority\": { \"type\": \"string\" },",
+							"                \"color\": { \"type\": \"string\" }",
+							"            }",
+							"        },",
+							"        \"assignee\": {",
+							"            \"type\": [\"object\", \"null\"],",
+							"            \"properties\": {",
+							"                \"id\": { \"type\": \"integer\" },",
+							"                \"color\": { \"type\": \"string\" },",
+							"                \"username\": { \"type\": \"string\" },",
+							"                \"initials\": { \"type\": \"string\" },",
+							"                \"profilePicture\": { \"type\": [\"string\", \"null\"] }",
+							"            }",
+							"        },",
+							"        \"task_count\": { \"type\": \"number\" },",
+							"        \"due_date\": { \"type\": [\"string\", \"null\"] },",
+							"        \"due_date_time\": { \"type\": [\"boolean\", \"null\"] },",
+							"        \"start_date\": { \"type\": [\"string\", \"null\"] },",
+							"        \"start_date_time\": { \"type\": [\"string\", \"null\"] },",
+							"        \"folder\": {",
+							"            \"type\": \"object\",",
+							"            \"required\": [\"id\", \"name\", \"hidden\", \"archived\", \"access\"],",
+							"            \"properties\": {",
+							"                \"id\": { \"type\": \"string\" },",
+							"                \"name\": { \"type\": \"string\" },",
+							"                \"hidden\": { \"type\": \"boolean\" },",
+							"                \"archived\": { \"type\": \"boolean\" },",
+							"                \"access\": { \"type\": \"boolean\" }",
+							"            }",
+							"        },",
+							"        \"space\": {",
+							"            \"type\": \"object\",",
+							"            \"required\": [\"id\", \"name\", \"archived\", \"access\"],",
+							"            \"properties\": {",
+							"                \"id\": { \"type\": \"string\" },",
+							"                \"name\": { \"type\": \"string\" },",
+							"                \"archived\": { \"type\": \"boolean\" },",
+							"                \"access\": { \"type\": \"boolean\" }",
+							"            }",
+							"        },",
+							"        \"inbound_address\": { \"type\": \"string\" },",
+							"        \"archived\": { \"type\": \"boolean\" },",
+							"        \"override_statuses\": { \"type\": \"boolean\" },",
+							"        \"statuses\": {",
+							"            \"type\": \"array\",",
+							"            \"items\": {",
+							"                \"type\": \"object\",",
+							"                \"required\": [\"id\", \"status\", \"orderindex\", \"color\", \"type\"],",
+							"                \"properties\": {",
+							"                    \"id\": { \"type\": \"string\" },",
+							"                    \"status\": { \"type\": \"string\" },",
+							"                    \"orderindex\": { \"type\": \"number\" },",
+							"                    \"color\": { \"type\": \"string\" },",
+							"                    \"type\": { \"type\": \"string\" },",
+							"                    \"status_group\": { \"type\": \"string\" }",
+							"                }",
+							"            }",
+							"        },",
+							"        \"permission_level\": { \"type\": \"string\" }",
+							"    }",
+							"};",
+							"",
+							"const validate = ajv.compile(schema);",
+							"",
+							"pm.test(\"Schema is valid\", function () {",
+							"    const valid = validate(jsonData);",
+							"    pm.expect(valid, JSON.stringify(validate.errors)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"ListNameUpdated-{{list_name}}\"\r\n   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_Url}}/list/{{list_id}}",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"list",
+						"{{list_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Lists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"/*",
+							"jsonData.lists.forEach(async  lists => { console.log(lists.id) ",
+							"try {",
+							"    const response = await pm.sendRequest({",
+							"        url: \"https://api.clickup.com/api/v2/list/\"+ lists.id,",
+							"        method: \"DELETE\",",
+							"        header: {",
+							"            Authorization: pm.collectionVariables.get(\"auth_token\"),",
+							"        },",
+							"    });",
+							"",
+							"    console.log(response.json());",
+							"} catch (err) {",
+							"    console.error(err);",
+							"}",
+							"})",
+							"*/",
+							"",
+							"for (i = 0; i < jsonData.lists.length; i++) {",
+							"    console.log(jsonData.lists[i].id)",
+							"}",
+							"for (i = 0; i < jsonData.lists.length; i++) {",
+							"    try {",
+							"        const response = pm.sendRequest({",
+							"            url: pm.collectionVariables.get(\"base_Url\") + \"/list/\" + jsonData.lists[i].id,",
+							"            method: \"DELETE\",",
+							"            header: {",
+							"                Authorization: pm.collectionVariables.get(\"auth_token\"),",
+							"            },",
+							"        });",
+							"",
+							"        //console.log(response.json());",
+							"    } catch (err) {",
+							"        console.error(err);",
+							"    }",
+							"",
+							"}",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const schema = {",
+							"    \"type\": \"object\",",
+							"    \"required\": [\"lists\"],",
+							"    \"properties\": {",
+							"        \"lists\": {",
+							"            \"type\": \"array\",",
+							"            \"items\": {",
+							"                \"type\": \"object\",",
+							"                \"required\": [\"id\", \"name\", \"orderindex\", \"content\", \"task_count\", \"assignee\", \"archived\", \"override_statuses\", \"start_date\", \"due_date\", \"permission_level\", \"folder\", \"space\"],",
+							"                \"properties\": {",
+							"                    \"id\": { \"type\": \"string\" },",
+							"                    \"name\": { \"type\": \"string\" },",
+							"                    \"orderindex\": { \"type\": \"number\" },",
+							"                    \"content\": { \"type\": \"string\" },",
+							"",
+							"                    \"status\": {",
+							"                        \"type\": [\"object\", \"null\"],",
+							"                        \"required\": [\"priority\", \"color\"],",
+							"                        \"properties\": {",
+							"                            \"priority\": { \"type\": \"string\" },",
+							"                            \"color\": { \"type\": \"string\" }",
+							"                            }",
+							"                        },",
+							"",
+							"                        \"priority\": { \"type\": [\"string\", \"null\"] },",
+							"                        \"assignee\": { \"type\": [\"object\", \"null\"] },",
+							"                        \"task_count\": { \"type\": \"number\" },",
+							"                        \"due_date\": { \"type\": [\"string\", \"null\"] },",
+							"                        \"start_date\": { \"type\": [\"string\", \"null\"] },",
+							"                        \"folder\": {",
+							"                            \"type\": \"object\",",
+							"                            \"required\": [\"id\", \"name\", \"hidden\", \"access\"],",
+							"                            \"properties\": {",
+							"                                \"id\": { \"type\": \"string\" },",
+							"                                \"name\": { \"type\": \"string\" },",
+							"                                \"hidden\": { \"type\": \"boolean\" },",
+							"                                \"archived\": { \"type\": \"boolean\" },",
+							"                                \"access\": { \"type\": \"boolean\" }",
+							"                            }",
+							"                        },",
+							"                        \"space\": {",
+							"                            \"type\": \"object\",",
+							"                            \"required\": [\"id\", \"name\", \"access\"],",
+							"                            \"properties\": {",
+							"                                \"id\": { \"type\": \"string\" },",
+							"                                \"name\": { \"type\": \"string\" },",
+							"                                \"archived\": { \"type\": \"boolean\" },",
+							"                                \"access\": { \"type\": \"boolean\" }",
+							"                            }",
+							"                        },",
+							"                        \"archived\": { \"type\": \"boolean\" },",
+							"                        \"override_statuses\": { \"type\": \"boolean\" },",
+							"                        \"permission_level\": { \"type\": \"string\" }",
+							"                    }",
+							"                }",
+							"            }",
+							"        }",
+							"    };",
+							"",
+							"    pm.test(\"Response body matches JSON schema\", function () {",
+							"        const Ajv = require(\"ajv\");",
+							"        const ajv = new Ajv();",
+							"        const validate = ajv.compile(schema);",
+							"        const valid = validate(pm.response.json());",
+							"        pm.expect(valid, JSON.stringify(validate.errors)).to.be.true;",
+							"    })",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"try {\r",
+							"    for (var i=0; i < 5; i++ ) {\r",
+							"     var random_string = pm.variables.replaceIn('ListName-{{$randomLoremWord}}')\r",
+							"     const response = pm.sendRequest({\r",
+							"        url:  pm.collectionVariables.get(\"base_Url\")+\"/folder/\"+ pm.collectionVariables.get(\"folder_ID\")+\"/list\",\r",
+							"        method: \"POST\",\r",
+							"         header: {\r",
+							"             Authorization: pm.collectionVariables.get(\"auth_token\"),\r",
+							"             \"Content-Type\": \"application/json\"\r",
+							"         },\r",
+							"         body: {\r",
+							"         mode: 'raw',\r",
+							"         raw: JSON.stringify({ name: random_string})\r",
+							"     }\r",
+							"     });\r",
+							"\r",
+							"     }\r",
+							" } catch (err) {\r",
+							"     console.error(err);\r",
+							" }\r",
+							" "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/folder/{{folder_ID}}/list",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"folder",
+						"{{folder_ID}}",
+						"list"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "folder_ID",
+			"value": "901211498392"
+		},
+		{
+			"key": "auth_token",
+			"value": "pk_302439923_394TAO04EGO4R1BB3Z3EUHQ0X30AJ410"
+		},
+		{
+			"key": "base_Url",
+			"value": "https://api.clickup.com/api/v2"
+		},
+		{
+			"key": "list_name",
+			"value": "vero"
+		},
+		{
+			"key": "list_id",
+			"value": "901218503070"
+		}
+	]
+}
