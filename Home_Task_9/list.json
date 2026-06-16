@@ -1,0 +1,144 @@
+{
+    "lists": [
+        {
+            "id": "901218757042",
+            "name": "ListName-a",
+            "orderindex": 0,
+            "content": "",
+            "status": null,
+            "priority": null,
+            "assignee": null,
+            "task_count": 0,
+            "due_date": null,
+            "start_date": null,
+            "folder": {
+                "id": "901211498392",
+                "name": "Test Folder 2",
+                "hidden": false,
+                "archived": false,
+                "access": true
+            },
+            "space": {
+                "id": "90127691289",
+                "name": "test 55",
+                "archived": false,
+                "access": true
+            },
+            "archived": false,
+            "override_statuses": false,
+            "permission_level": "create"
+        },
+        {
+            "id": "901218757043",
+            "name": "ListName-beatae",
+            "orderindex": 1,
+            "content": "",
+            "status": null,
+            "priority": null,
+            "assignee": null,
+            "task_count": 0,
+            "due_date": null,
+            "start_date": null,
+            "folder": {
+                "id": "901211498392",
+                "name": "Test Folder 2",
+                "hidden": false,
+                "archived": false,
+                "access": true
+            },
+            "space": {
+                "id": "90127691289",
+                "name": "test 55",
+                "archived": false,
+                "access": true
+            },
+            "archived": false,
+            "override_statuses": false,
+            "permission_level": "create"
+        },
+        {
+            "id": "901218757045",
+            "name": "ListName-deleniti",
+            "orderindex": 2,
+            "content": "",
+            "status": null,
+            "priority": null,
+            "assignee": null,
+            "task_count": 0,
+            "due_date": null,
+            "start_date": null,
+            "folder": {
+                "id": "901211498392",
+                "name": "Test Folder 2",
+                "hidden": false,
+                "archived": false,
+                "access": true
+            },
+            "space": {
+                "id": "90127691289",
+                "name": "test 55",
+                "archived": false,
+                "access": true
+            },
+            "archived": false,
+            "override_statuses": false,
+            "permission_level": "create"
+        },
+        {
+            "id": "901218757044",
+            "name": "ListName-voluptate",
+            "orderindex": 3,
+            "content": "",
+            "status": null,
+            "priority": null,
+            "assignee": null,
+            "task_count": 0,
+            "due_date": null,
+            "start_date": null,
+            "folder": {
+                "id": "901211498392",
+                "name": "Test Folder 2",
+                "hidden": false,
+                "archived": false,
+                "access": true
+            },
+            "space": {
+                "id": "90127691289",
+                "name": "test 55",
+                "archived": false,
+                "access": true
+            },
+            "archived": false,
+            "override_statuses": false,
+            "permission_level": "create"
+        },
+        {
+            "id": "901218757041",
+            "name": "ListName-voluptatibus",
+            "orderindex": 4,
+            "content": "",
+            "status": null,
+            "priority": null,
+            "assignee": null,
+            "task_count": 0,
+            "due_date": null,
+            "start_date": null,
+            "folder": {
+                "id": "901211498392",
+                "name": "Test Folder 2",
+                "hidden": false,
+                "archived": false,
+                "access": true
+            },
+            "space": {
+                "id": "90127691289",
+                "name": "test 55",
+                "archived": false,
+                "access": true
+            },
+            "archived": false,
+            "override_statuses": false,
+            "permission_level": "create"
+        }
+    ]
+}
