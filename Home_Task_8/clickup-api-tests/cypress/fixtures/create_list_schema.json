@@ -1,0 +1,222 @@
+{
+    "type": "object",
+    "required": [
+        "id",
+        "name",
+        "orderindex",
+        "task_count",
+        "content",
+        "folder",
+        "space",
+        "inbound_address",
+        "assignee",
+        "due_date",
+        "start_date"
+    ],
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "deleted": {
+            "type": "boolean"
+        },
+        "orderindex": {
+            "type": "number"
+        },
+        "content": {
+            "type": "string"
+        },
+        "priority": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "required": [
+                "priority",
+                "color"
+            ],
+            "properties": {
+                "priority": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string"
+                }
+            }
+        },
+        "assignee": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "required": [
+                "id",
+                "color",
+                "username",
+                "initials",
+                "profilePicture"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "integer"
+                },
+                "initials": {
+                    "type": "string"
+                },
+                "profilePicture": {
+                    "type": "string"
+                }
+            }
+        },
+        "task_count": {
+            "type": "number"
+        },
+        "due_date": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "start_date": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "start_date_time": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "due_date_time": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "folder": {
+            "type": "object",
+            "required": [
+                "id",
+                "name",
+                "hidden",
+                "archived",
+                "access"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "hidden": {
+                    "type": "boolean"
+                },
+                "archived": {
+                    "type": "boolean"
+                },
+                "access": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "space": {
+            "type": "object",
+            "required": [
+                "id",
+                "name",
+                "archived",
+                "access"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "archived": {
+                    "type": "boolean"
+                },
+                "access": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "inbound_address": {
+            "type": "string"
+        },
+        "archived": {
+            "type": "boolean"
+        },
+        "override_statuses": {
+            "type": "boolean"
+        },
+        "statuses": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "status",
+                    "orderindex",
+                    "color",
+                    "type"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "orderindex": {
+                        "type": "number"
+                    },
+                    "color": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "status_group": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "permission_level": {
+            "type": "string"
+        },
+        "status": {
+            "type": "object",
+            "required": [
+                "status",
+                "color",
+                "hide_label"
+            ],
+            "properties": {
+                "istatus": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "hide_label": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}
